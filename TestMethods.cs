@@ -15,7 +15,46 @@ namespace TestProject1
 
         internal static Stack<int> GetNextGreaterValue(Stack<int> sourceStack)
         {
-            Stack<int> result = null;
+             Stack<int> result;
+            
+
+            int[] arreglo = new int[sourceStack.Count];
+            for(int i =0; sourceStack.Count >0; i++)
+            {
+                arreglo[i] = sourceStack.Pop;                
+            }
+
+            for (int i = 0; i >= arreglo.Length - 1; i++)
+            {
+                int comparar = arreglo[arreglo.Length - i];
+                int resultado;
+                int numeromayor = 0; 
+
+                for(int i=arreglo.Length; i<=1; i--)
+                {
+                    if(comparar> arreglo[i- 1])
+                    {
+                        if(comparar< numeromayor)
+                        {
+                            resultado = numeromayor;
+                        }
+                        else
+                        {
+                            resultado = -1;
+                        }
+                        
+                        
+                    }
+                    else if ( comparar < arreglo[i - 1])
+                    {
+                        numeromayor = arreglo[i - 1];
+                        resultado = numeromayor;
+
+                    }
+                }
+                result.Push(resultado);
+
+            }
 
             return result;
         }
