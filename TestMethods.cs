@@ -56,6 +56,7 @@ namespace TestProject1
 
             }
 
+            result.Push(-1);
             return result;
         }
 
