@@ -119,9 +119,38 @@ namespace TestProject1
             return count;
         }
 
-        internal static Dictionary<int, EValueType> SortDictionaryRegistries(Dictionary<int, EValueType> sourceDict)
+       internal static Dictionary<int, EValueType> SortDictionaryRegistries(Dictionary<int, EValueType> sourceDict)
         {
-            Dictionary<int, EValueType> result = null;
+
+            List<int> temporal = new List<int>();
+            int nroTemp;
+
+            foreach (var entry in sourceDict)
+            {
+                temporal.Add(entry.key);
+            }
+
+            for (int i=0; i<= temporal.Length; i++)
+            {
+                for(int j=0; j<= temporal.Length; j++)
+                {
+                    if(temporal[j]< temporal[j + 1])
+                    {
+                        nroTemp = temporal[j + 1];
+                        temporal[j + 1] = temporal[j];
+                        temporal[j] = nroTemp;
+                    }
+                }
+
+            }
+
+            int[temporal.Length] arregloDes;
+            for (int i=0; i<=temporal.Length;i++)
+            {
+                arregloDes[i] = temporal[i];
+            }          
+
+            Dictionary<int, EValueType> result= FillDictionaryFromSource(arregloDes);
 
             return result;
         }
