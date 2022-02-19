@@ -24,7 +24,7 @@ namespace TestProject1
                 arreglo[i] = sourceStack.Pop;                
             }
 
-            for (int i = 0; i >= arreglo.Length - 1; i++)
+            for (int i = 0; i <= arreglo.Length - 1; i++)
             {
                 int comparar = arreglo[arreglo.Length - i];
                 int resultado;
