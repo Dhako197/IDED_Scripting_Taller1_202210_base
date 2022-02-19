@@ -13,26 +13,26 @@ namespace TestProject1
             Prime
         }
 
-        internal static Stack<int> GetNextGreaterValue(Stack<int> sourceStack)
+         internal static Stack<int> GetNextGreaterValue(Stack<int> sourceStack)
         {
-             Stack<int> result;
+            Stack<int> result = new Stack<int>();
             
 
             int[] arreglo = new int[sourceStack.Count];
             for(int i =0; sourceStack.Count >0; i++)
-            {
-                arreglo[i] = sourceStack.Pop;                
+            {              
+                arreglo[i] = sourceStack.Pop();                
             }
 
             for (int i = 0; i <= arreglo.Length - 1; i++)
             {
                 int comparar = arreglo[arreglo.Length - i];
-                int resultado;
+                int resultado=0;
                 int numeromayor = 0; 
 
-                for(int i=arreglo.Length; i<=1; i--)
+                for(int j=arreglo.Length; j<=1; j--)
                 {
-                    if(comparar> arreglo[i- 1])
+                    if(comparar> arreglo[j- 1])
                     {
                         if(comparar< numeromayor)
                         {
@@ -69,23 +69,23 @@ namespace TestProject1
             {
                 if ((sourceArr[i - 1] % 2) == 0)
                 {
-                    Dictionary.Add(sourceArr[i - 1], EValueType.Two);
+                    result.Add(sourceArr[i - 1], EValueType.Two);
                 }
                 else if ((sourceArr[i-1]%3)==0)
                 {
-                    Dictionary.Add(sourceArr[i - 1], EValueType.Three);
+                    result.Add(sourceArr[i - 1], EValueType.Three);
                 }
                 else if ((sourceArr[i - 1] % 5) == 0)
                 {
-                    Dictionary.Add(sourceArr[i - 1], EValueType.Five);
+                    result.Add(sourceArr[i - 1], EValueType.Five);
                 }
                 else if ((sourceArr[i - 1] % 7) == 0)
                 {
-                    Dictionary.Add(sourceArr[i - 1], EValueType.Seven);
+                    result.Add(sourceArr[i - 1], EValueType.Seven);
                 }
                 else if(EsPrimo(sourceArr[i-1]))
                 {
-                    Dictionary.Add(sourceArr[i - 1], EValueType.Prime);
+                    result.Add(sourceArr[i - 1], EValueType.Prime);
                 }
             }
 
@@ -109,6 +109,7 @@ namespace TestProject1
             return true;
         }
 
+
         internal static int CountDictionaryRegistriesWithValueType(Dictionary<int, EValueType> sourceDict, EValueType type)
         {
             int count=0;
@@ -119,7 +120,7 @@ namespace TestProject1
             return count;
         }
 
-       internal static Dictionary<int, EValueType> SortDictionaryRegistries(Dictionary<int, EValueType> sourceDict)
+        internal static Dictionary<int, EValueType> SortDictionaryRegistries(Dictionary<int, EValueType> sourceDict)
         {
 
             List<int> temporal = new List<int>();
@@ -130,9 +131,9 @@ namespace TestProject1
                 temporal.Add(entry.key);
             }
 
-            for (int i=0; i<= temporal.Length; i++)
+            for (int i=0; i<= temporal.Count; i++)
             {
-                for(int j=0; j<= temporal.Length; j++)
+                for(int j=0; j<= temporal.Count; j++)
                 {
                     if(temporal[j]< temporal[j + 1])
                     {
@@ -144,8 +145,8 @@ namespace TestProject1
 
             }
 
-            int[temporal.Length] arregloDes;
-            for (int i=0; i<=temporal.Length;i++)
+            int[] arregloDes = new int[temporal.Count];
+            for (int i=0; i<=temporal.Count;i++)
             {
                 arregloDes[i] = temporal[i];
             }          
@@ -155,7 +156,7 @@ namespace TestProject1
             return result;
         }
 
-       internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
+        internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
         {
 
             Queue<Ticket> payments = new Queue<Ticket>();
@@ -180,7 +181,7 @@ namespace TestProject1
                 }
             }
 
-            Queue<Ticket>[] result = new Queue<Ticket>(payments, subscription, cancellation);
+            Queue<Ticket>[] result = new Queue<Ticket>[] {payments,subscription,cancellation};
 
             return result;
         }
@@ -188,9 +189,9 @@ namespace TestProject1
         internal static List<Ticket> OrdenarListaTiquetes(List<Ticket> lista)
         {
             Ticket temp;
-            for (int i = 0; i <= lista.Length; i++)
+            for (int i = 0; i <= lista.Count; i++)
             {
-                for (int j = 0; j <= lista.Length; j++)
+                for (int j = 0; j <= lista.Count; j++)
                 {
                     if (lista[j].Turn > lista[j + 1].Turn)
                     {
@@ -218,6 +219,6 @@ namespace TestProject1
             else result = false;
 
             return result;
-        } 
+        }       
     }
 }
