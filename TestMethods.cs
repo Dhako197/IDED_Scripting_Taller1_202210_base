@@ -155,18 +155,69 @@ namespace TestProject1
             return result;
         }
 
-        internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
+       internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
         {
-            Queue<Ticket>[] result = null;
+
+            Queue<Ticket> payments = new Queue<Ticket>();
+            Queue<Ticket> subscription = new Queue<Ticket>();
+            Queue<Ticket> cancellation = new Queue<Ticket>();
+
+            List<Ticket> ordenada = OrdenarListaTiquetes(sourceList);
+
+            foreach(Ticket tiquete in ordenada)
+            {
+                if(tiquete.RequestType == Ticket.ERequestType.Payment)
+                {
+                    payments.Enqueue(tiquete);
+                }
+                else if(tiquete.RequestType== Ticket.ERequestType.Subscription)
+                {
+                    subscription.Enqueue(tiquete);
+                }
+                else if (tiquete.RequestType == Ticket.ERequestType.Cancellation)
+                {
+                    cancellation.Enqueue(tiquete);
+                }
+            }
+
+            Queue<Ticket>[] result = new Queue<Ticket>(payments, subscription, cancellation);
 
             return result;
         }
 
+        internal static List<Ticket> OrdenarListaTiquetes(List<Ticket> lista)
+        {
+            Ticket temp;
+            for (int i = 0; i <= lista.Length; i++)
+            {
+                for (int j = 0; j <= lista.Length; j++)
+                {
+                    if (lista[j].Turn > lista[j + 1].Turn)
+                    {
+                       temp = lista[j + 1];
+                       lista[j + 1] = lista[j];
+                       lista[j] = temp;
+                    }
+                }
+
+            }
+
+            return lista;
+        }
+            
+
         internal static bool AddNewTicket(Queue<Ticket> targetQueue, Ticket ticket)
         {
-            bool result = false;
+            bool result;
+            Ticket ultimoCola = targetQueue.Peek();
+            if (ticket.RequestType == ultimoCola.RequestType)
+            {
+                result = true;
+
+            }
+            else result = false;
 
             return result;
-        }        
+        } 
     }
 }
